@@ -14,7 +14,7 @@ const burger = (props) => {
     }, []);
     
     console.log(ingredients);
-    if (ingredients.length == 0) {
+    if (ingredients.length === 0) {
         ingredients = "Please Start Adding Ingredients!!!!"
     }
     return (

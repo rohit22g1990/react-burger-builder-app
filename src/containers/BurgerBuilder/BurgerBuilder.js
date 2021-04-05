@@ -37,14 +37,14 @@ class BurgerBuilder extends Component {
 
     updateIngredient = (operation, type) => {
         let oldIngredientCount = this.state.ingredients[type];
-        let updatedIngredientCount = operation == ADD_OPERATION ?  oldIngredientCount + 1 : oldIngredientCount - 1;
+        let updatedIngredientCount = operation === ADD_OPERATION ?  oldIngredientCount + 1 : oldIngredientCount - 1;
         let updatedIngredient = {...this.state.ingredients};
         updatedIngredient[type] = updatedIngredientCount > 0 ? updatedIngredientCount : 0;
 
         let price = INGREDIENT_PRICE[type];
         let oldPrice = this.state.totalPrice;
         
-        let updatedPrice = operation == ADD_OPERATION ? parseInt(oldPrice) + parseInt(price)
+        let updatedPrice = operation === ADD_OPERATION ? parseInt(oldPrice) + parseInt(price)
                                             : parseInt(oldPrice) - parseInt(price); 
 
         let newPrice = updatedPrice > BASE_PRICE ? updatedPrice : BASE_PRICE;
@@ -58,12 +58,12 @@ class BurgerBuilder extends Component {
             <Aux>
                 <Burger ingredients={this.state.ingredients}/>
                 <h3>Price: {this.state.totalPrice}</h3>
-
+                
                 <BuildControls
                 ingredients = {this.state.ingredients}
                 addIngredients = {this.addIngredeintHandler} 
                 removeIngredients = {this.removeIngredeintHandler} 
-                purchasable = {BASE_PRICE == this.state.totalPrice}
+                purchasable = {BASE_PRICE === this.state.totalPrice}
                 />
             </Aux>    
         )
