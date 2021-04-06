@@ -1,6 +1,7 @@
 import react, { Component } from 'react';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Burger from '../../components/Burger/Burger';
+import OrderSummaryModal from '../../components/UI/Modal/OrderSummaryModal';
 import Aux from '../../hoc/Aux'
 
 const INGREDIENT_PRICE = {
@@ -24,7 +25,21 @@ class BurgerBuilder extends Component {
             cheese: 0,
             meat: 0 
         },
-        totalPrice: BASE_PRICE
+        totalPrice: BASE_PRICE,
+        showOrderSummary: false,
+    };
+
+    handleModalClose = () => {
+        this.setState({
+            showOrderSummary: false
+        });
+    };
+
+    handleModalShow = () => {
+        this.setState({
+            showOrderSummary: true
+        });
+        console.log(this.state);
     };
 
     addIngredeintHandler = (type) => {
@@ -64,7 +79,15 @@ class BurgerBuilder extends Component {
                 addIngredients = {this.addIngredeintHandler} 
                 removeIngredients = {this.removeIngredeintHandler} 
                 purchasable = {BASE_PRICE === this.state.totalPrice}
+                showModal={this.handleModalShow}
                 />
+
+                <OrderSummaryModal 
+                    showModal={this.state.showOrderSummary} 
+                    hideModal={this.handleModalClose}
+                    ingredients={this.state.ingredients}
+                    totalPrice={this.state.totalPrice}
+                    />
             </Aux>    
         )
     }
